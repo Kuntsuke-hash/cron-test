@@ -1,0 +1,14 @@
+name: cron-test
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 8 * * *"   # 17:17 JST
+    - cron: "37 8 * * *"   # 17:37 JST (backup chance)
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print JST time
+        run: |
+          echo "JST TIME ##### : $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')"
+          echo "UTC TIME ##### : $(date -u '+%Y-%m-%d %H:%M:%S')"
